@@ -1,0 +1,97 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import Button from "@/components/Button";
+import styles from "./Header.module.css";
+
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Courses", href: "/courses" },
+  { label: "Student Results", href: "/student-results" },
+  { label: "FAQs", href: "/faqs" },
+  { label: "Contact", href: "/contact" },
+];
+
+export default function Header() {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.logo} onClick={closeMenu}>
+          <span className={styles.monogram} aria-hidden="true">
+            TL
+          </span>
+          <span className={styles.wordmark}>
+            Nails
+            <br />
+            Academy
+          </span>
+        </Link>
+
+        <nav
+          id="primary-navigation"
+          className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}
+          aria-label="Primary"
+        >
+          <ul className={styles.navList}>
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={styles.navLink}
+                  aria-current={pathname === href ? "page" : undefined}
+                  onClick={closeMenu}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.menuButton}
+            aria-expanded={isMenuOpen}
+            aria-controls="primary-navigation"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span className={styles.menuIcon} aria-hidden="true" />
+          </button>
+
+          <Button
+            as="link"
+            href="/courses"
+            shape="pill"
+            size="sm"
+            withArrow
+            className={styles.cta}
+            onClick={closeMenu}
+          >
+            Book a Course
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+}

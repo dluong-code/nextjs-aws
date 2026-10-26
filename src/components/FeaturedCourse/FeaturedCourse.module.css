@@ -1,0 +1,161 @@
+.section {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 48px;
+}
+
+/* Mobile: heading left, "View All" right */
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 7vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.viewAll {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  transition: color 0.2s;
+}
+
+.viewAll:focus-visible {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+.viewAllSuffix {
+  display: none;
+}
+
+/* Slider: cards bleed past the right edge so the next one peeks in */
+.slider {
+  margin: 0 -6px;
+}
+
+.slider :global(.slick-track) {
+  display: flex;
+}
+
+.slider :global(.slick-slide) {
+  height: auto;
+}
+
+.slider :global(.slick-slide > div) {
+  height: 100%;
+}
+
+.slide {
+  height: 100%;
+  padding: 2px 6px 4px;
+}
+
+.slider :global(.slick-dots) {
+  display: flex !important;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  list-style: none;
+}
+
+.slider :global(.slick-dots button) {
+  display: block;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  font-size: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(29 29 24 / 0.18);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.slider :global(.slick-dots .slick-active button) {
+  background-color: var(--color-olive);
+}
+
+.slider :global(.slick-dots button:focus-visible) {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 3px;
+}
+
+/* Tablet: two cards plus a peek */
+@media (min-width: 600px) {
+  .inner {
+    padding: 56px 32px 64px;
+  }
+
+  .intro {
+    margin-bottom: 28px;
+  }
+
+  .viewAllSuffix {
+    display: inline;
+  }
+
+  .slider {
+    margin: 0 -10px;
+  }
+
+  .slide {
+    padding: 2px 10px 4px;
+  }
+}
+
+/* Desktop: centred heading, "View All Courses" pinned right, three cards plus a peek */
+@media (min-width: 1024px) {
+  .inner {
+    padding: 72px 40px 80px;
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-bottom: 36px;
+  }
+
+  .heading {
+    grid-column: 2;
+    text-align: center;
+  }
+
+  .viewAll {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .slider {
+    margin: 0 -12px;
+  }
+
+  .slide {
+    padding: 2px 12px 4px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .viewAll:hover {
+    color: var(--color-olive);
+  }
+}

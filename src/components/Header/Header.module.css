@@ -1,0 +1,217 @@
+/* Mobile & tablet first: solid header sitting above the slider */
+.header {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  background-color: var(--color-cream);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 20px;
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-ink);
+}
+
+.monogram {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: var(--color-olive);
+}
+
+.wordmark {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Navigation: collapsible panel below tablet/mobile */
+.nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  background-color: var(--color-cream);
+  border-top: 1px solid var(--color-line);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 0.08);
+}
+
+.navOpen {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 8px 20px 16px;
+}
+
+.navLink {
+  display: block;
+  padding: 14px 0;
+  font-size: 16px;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+  transition: color 0.2s;
+}
+
+.navList li:last-child .navLink {
+  border-bottom: 0;
+}
+
+.navLink[aria-current="page"] {
+  color: var(--color-olive);
+  font-weight: 600;
+}
+
+.navLink:focus-visible,
+.menuButton:focus-visible {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+/* Actions: hamburger + CTA */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+/* Three-line icon that morphs into an X */
+.menuIcon,
+.menuIcon::before,
+.menuIcon::after {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: currentColor;
+  transition:
+    transform 0.25s,
+    background-color 0.25s;
+}
+
+.menuIcon {
+  position: relative;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menuIcon::before {
+  transform: translateY(-7px);
+}
+
+.menuIcon::after {
+  transform: translateY(7px);
+}
+
+.menuButton[aria-expanded="true"] .menuIcon {
+  background-color: transparent;
+}
+
+.menuButton[aria-expanded="true"] .menuIcon::before {
+  transform: rotate(45deg);
+}
+
+.menuButton[aria-expanded="true"] .menuIcon::after {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 479px) {
+  .cta {
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+/* Desktop: static inline nav, header floats over the slider with a fading gradient */
+@media (min-width: 1024px) {
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      to right,
+      rgb(244 240 232 / 0.95) 0%,
+      rgb(244 240 232 / 0.85) 45%,
+      rgb(244 240 232 / 0.35) 75%,
+      rgb(244 240 232 / 0.1) 100%
+    );
+    backdrop-filter: blur(2px);
+  }
+
+  .inner {
+    padding: 18px 40px;
+    gap: 40px;
+  }
+
+  .nav {
+    position: static;
+    display: block;
+    margin-left: auto;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: 36px;
+    padding: 0;
+  }
+
+  .navLink {
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 0;
+  }
+
+  .navLink[aria-current="page"] {
+    font-weight: 500;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .navLink:hover {
+    color: var(--color-olive);
+  }
+}

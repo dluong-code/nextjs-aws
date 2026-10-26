@@ -1,0 +1,177 @@
+/* Mobile first: keeps the three-column layout from the mobile design, compacted */
+.section {
+  width: 100%;
+  background-color: var(--color-sage);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 48px;
+}
+
+.intro {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 7vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.subtitle {
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--color-cream);
+  box-shadow: 0 1px 2px rgb(29 29 24 / 0.06);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-stone);
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 12px 10px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: 6px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+
+/* Full-width button pinned to the bottom so cards line up */
+.cta {
+  width: 100%;
+  margin-top: auto;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+@media (max-width: 419px) {
+  .cta svg {
+    display: none;
+  }
+}
+
+/* Tablet: same three columns, scaled up between the mobile and desktop designs */
+@media (min-width: 600px) {
+  .inner {
+    padding: 56px 32px 64px;
+  }
+
+  .intro {
+    margin-bottom: 32px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .grid {
+    gap: 16px;
+  }
+
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .body {
+    padding: 18px 16px 16px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .description {
+    margin-top: 8px;
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+
+  .cta {
+    padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+/* Desktop: wider landscape images, roomier cards */
+@media (min-width: 1024px) {
+  .inner {
+    padding: 72px 40px 80px;
+  }
+
+  .intro {
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    gap: 24px;
+  }
+
+  .media {
+    aspect-ratio: 16 / 7;
+  }
+
+  .body {
+    padding: 24px 24px 24px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .cta {
+    min-height: 48px;
+  }
+}

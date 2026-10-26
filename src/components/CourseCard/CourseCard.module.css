@@ -1,0 +1,185 @@
+/* Mobile first: horizontal card, image on the left */
+.card {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--color-cream);
+  box-shadow: 0 1px 3px rgb(29 29 24 / 0.08);
+}
+
+.media {
+  position: relative;
+  flex: 0 0 36%;
+  min-height: 180px;
+  background-color: var(--color-stone);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 12px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-divider);
+  list-style: none;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.meta li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.meta svg {
+  flex-shrink: 0;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.price {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.cta {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Tablet & desktop: vertical card, image on top */
+@media (min-width: 600px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .media {
+    flex: none;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .body {
+    padding: 18px 18px 18px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .meta {
+    margin-top: 14px;
+    padding-top: 12px;
+    font-size: 12px;
+  }
+
+  .footer {
+    padding-top: 16px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .cta {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .media {
+    aspect-ratio: 2 / 1;
+  }
+
+  .body {
+    padding: 20px 22px 22px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .meta {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-divider);
+  }
+}
+
+/* Single row with dividers once cards are wide enough */
+@media (min-width: 1280px) {
+  .meta {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .meta li {
+    padding: 0 7px;
+  }
+
+  .meta li:first-child {
+    padding-left: 0;
+  }
+
+  .meta li + li {
+    border-left: 1px solid var(--color-divider);
+  }
+}

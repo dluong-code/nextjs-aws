@@ -21,6 +21,10 @@
   outline-offset: 3px;
 }
 
+.light:focus-visible {
+  outline-color: var(--color-cream);
+}
+
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -41,6 +45,12 @@
 .secondary {
   background-color: transparent;
   border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.light {
+  background-color: var(--color-cream);
+  border-color: var(--color-cream);
   color: var(--color-ink);
 }
 
@@ -80,6 +90,11 @@
 
   .secondary:not(:disabled):hover {
     background-color: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  .light:not(:disabled):hover {
+    background-color: transparent;
     color: var(--color-cream);
   }
 

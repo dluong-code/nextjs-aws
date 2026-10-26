@@ -1,5 +1,7 @@
+import AboutIntro, { type AboutIntroProps } from "@/components/AboutIntro";
 import { type Course } from "@/components/CourseCard";
 import CourseCategory, { type CourseCategoryItem } from "@/components/CourseCategory";
+import Footer from "@/components/Footer";
 import FeaturedCourse from "@/components/FeaturedCourse";
 import FeatureBar, { type Feature } from "@/components/FeatureBar";
 import Header from "@/components/Header";
@@ -157,6 +159,24 @@ const FEATURED_COURSES: Course[] = [
   },
 ];
 
+const ABOUT_INTRO: AboutIntroProps = {
+  title: "More than a course.\nA supportive journey.",
+  description:
+    "At TL Nails Academy, I'm passionate about helping others build real skills, confidence and opportunities in the nail industry. You'll receive hands-on training, ongoing support and guidance every step of the way.",
+  cta: { label: "My Story", href: "/about" },
+  stats: [
+    { value: "100+", label: "Students Trained" },
+    { value: "5★", label: "Rated by Students" },
+    { value: "Ongoing", label: "Support" },
+    { value: "Real Skills", label: "Real Opportunities" },
+  ],
+  image: {
+    alt: "Smiling nail educator in a TL Nails Academy apron at her studio.",
+    desktop: { src: "/about/about-intro-desktop.png", width: 345, height: 138 },
+    mobile: { src: "/about/about-intro-mobile.png", width: 128, height: 154 },
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -170,7 +190,9 @@ export default function Home() {
           categories={COURSE_CATEGORIES}
         />
         <FeaturedCourse courses={FEATURED_COURSES} />
+        <AboutIntro {...ABOUT_INTRO} />
       </main>
+      <Footer />
     </>
   );
 }

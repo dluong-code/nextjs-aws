@@ -3,7 +3,8 @@ import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 import styles from "./Button.module.css";
 
 type CommonProps = {
-  variant?: "primary" | "secondary";
+  /** "light" is for dark backgrounds */
+  variant?: "primary" | "secondary" | "light";
   size?: "sm" | "md" | "lg";
   shape?: "rounded" | "pill";
   withArrow?: boolean;

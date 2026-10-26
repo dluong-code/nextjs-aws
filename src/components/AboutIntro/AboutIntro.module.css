@@ -1,0 +1,257 @@
+/*
+ * Mobile first: photo beside the text, stats in a strip underneath.
+ * Grid areas let the same markup become one row on desktop.
+ */
+.section {
+  width: 100%;
+  background-color: var(--color-sand);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 44% minmax(0, 1fr);
+  grid-template-areas:
+    "media text"
+    "media cta"
+    "stats stats";
+  grid-template-rows: 1fr auto auto;
+}
+
+/* Photo fades into the section background on its right edge */
+.media {
+  position: relative;
+  grid-area: media;
+  min-height: 240px;
+  overflow: hidden;
+  background-color: var(--color-stone);
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgb(237 230 220 / 0) 70%,
+    var(--color-sand) 100%
+  );
+  pointer-events: none;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.text {
+  grid-area: text;
+  align-self: end;
+  padding: 24px 12px 0 12px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 5.2vw, 24px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  white-space: pre-line;
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.cta {
+  grid-area: cta;
+  padding: 14px 16px 24px 14px;
+}
+
+.cta > a {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+/* Stats strip */
+.stats {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 18px 8px;
+  list-style: none;
+  background-color: var(--color-cream);
+  border-top: 1px solid var(--color-divider);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  text-align: center;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--color-divider);
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 4.6vw, 26px);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.statLabel {
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--color-muted);
+}
+
+/* Tablet: same structure as mobile, given more room and larger type */
+@media (min-width: 600px) {
+  .layout {
+    grid-template-columns: 45% minmax(0, 1fr);
+  }
+
+  .media {
+    min-height: 360px;
+  }
+
+  .text {
+    padding: 48px 32px 0 24px;
+  }
+
+  .title {
+    font-size: clamp(28px, 4.2vw, 34px);
+  }
+
+  .description {
+    max-width: 420px;
+    margin-top: 16px;
+    font-size: 15px;
+  }
+
+  .cta {
+    padding: 24px 32px 48px 24px;
+  }
+
+  .cta > a {
+    min-height: 48px;
+    padding: 0 24px;
+    font-size: 15px;
+  }
+
+  .stats {
+    padding: 24px 32px;
+  }
+
+  .statLabel {
+    font-size: 13px;
+  }
+}
+
+/* Desktop: full-bleed photo on the left; stats sit under the CTA until there's room beside it */
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 48% minmax(0, 1fr);
+    grid-template-areas:
+      "media text"
+      "media cta"
+      "media stats";
+    grid-template-rows: 1fr auto auto;
+    min-height: 360px;
+  }
+
+  .media {
+    min-height: 0;
+  }
+
+  .media::after {
+    background: linear-gradient(
+      to right,
+      rgb(237 230 220 / 0) 55%,
+      rgb(237 230 220 / 0.7) 80%,
+      var(--color-sand) 100%
+    );
+  }
+
+  .image {
+    object-position: center;
+  }
+
+  .text {
+    max-width: 600px;
+    padding: 56px 40px 0 32px;
+  }
+
+  .title {
+    font-size: clamp(36px, 3.2vw, 48px);
+  }
+
+  .description {
+    max-width: 480px;
+  }
+
+  .cta {
+    align-self: center;
+    padding: 28px 24px 0 32px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 24px;
+    padding: 28px 24px 56px 32px;
+    background: none;
+    border-top: 0;
+  }
+
+  .stat {
+    align-items: flex-start;
+    padding: 0;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .stat + .stat {
+    border-left: 0;
+  }
+
+  .statValue {
+    font-size: 24px;
+  }
+
+  .statLabel {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .layout {
+    grid-template-columns: 48% auto minmax(0, 1fr);
+    grid-template-areas:
+      "media text text"
+      "media cta stats";
+    grid-template-rows: 1fr auto;
+  }
+
+  .cta {
+    padding: 28px 8px 56px 32px;
+  }
+
+  .stats {
+    align-self: center;
+    gap: 28px;
+    padding: 28px 40px 56px 24px;
+  }
+}

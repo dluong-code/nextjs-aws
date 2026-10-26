@@ -4,16 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
+import Logo from "@/components/Logo";
+import { NAV_LINKS } from "@/config/navigation";
 import styles from "./Header.module.css";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Courses", href: "/courses" },
-  { label: "Student Results", href: "/student-results" },
-  { label: "FAQs", href: "/faqs" },
-  { label: "Contact", href: "/contact" },
-];
 
 export default function Header() {
   const pathname = usePathname();
@@ -35,16 +28,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.logo} onClick={closeMenu}>
-          <span className={styles.monogram} aria-hidden="true">
-            TL
-          </span>
-          <span className={styles.wordmark}>
-            Nails
-            <br />
-            Academy
-          </span>
-        </Link>
+        <Logo onClick={closeMenu} />
 
         <nav
           id="primary-navigation"

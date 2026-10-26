@@ -1,0 +1,177 @@
+/* Mobile first: brand on top, link columns side by side, contact full width */
+.footer {
+  width: 100%;
+  background-color: var(--color-olive-dark);
+  color: var(--color-cream);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "brand brand"
+    "explore courses"
+    "contact contact";
+  gap: 36px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px 40px;
+}
+
+.brand {
+  grid-area: brand;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.explore {
+  grid-area: explore;
+}
+
+.courses {
+  grid-area: courses;
+}
+
+.contactColumn {
+  grid-area: contact;
+}
+
+.tagline {
+  max-width: 340px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgb(244 240 232 / 0.75);
+}
+
+.heading {
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+.links,
+.contact,
+.social {
+  list-style: none;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  font-size: 14px;
+  color: rgb(244 240 232 / 0.8);
+  transition: color 0.2s;
+}
+
+.link:focus-visible,
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: rgb(244 240 232 / 0.8);
+}
+
+.contact li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.contact svg {
+  flex-shrink: 0;
+  color: var(--color-cream);
+}
+
+.contact a {
+  overflow-wrap: anywhere;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(244 240 232 / 0.3);
+  border-radius: 50%;
+  color: var(--color-cream);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.bottom {
+  border-top: 1px solid rgb(244 240 232 / 0.15);
+}
+
+.copyright {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: rgb(244 240 232 / 0.65);
+}
+
+/* Tablet: brand across the top, three columns beneath */
+@media (min-width: 600px) {
+  .inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "brand brand brand"
+      "explore courses contact";
+    gap: 40px 32px;
+    padding: 56px 32px 48px;
+  }
+}
+
+/* Desktop: everything in one row, brand column wider */
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    grid-template-areas: "brand explore courses contact";
+    gap: 48px;
+    padding: 72px 40px 56px;
+  }
+
+  .copyright {
+    padding: 24px 40px;
+    text-align: left;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--color-cream);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .socialLink:hover {
+    background-color: var(--color-cream);
+    color: var(--color-olive-dark);
+  }
+}

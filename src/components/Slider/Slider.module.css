@@ -107,6 +107,12 @@
   list-style: none;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .slider :global(.slick-dots) {
+    visibility: hidden;
+  }
+}
+
 .slider :global(.slick-dots button) {
   display: block;
   width: 28px;

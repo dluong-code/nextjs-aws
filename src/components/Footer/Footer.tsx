@@ -23,7 +23,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <div className={styles.brand}>
+        <div className={styles.brand} data-reveal>
           <Logo tone="light" />
           <p className={styles.tagline}>
             Professional, hands-on nail education with the skills, confidence and support to build
@@ -34,7 +34,7 @@ export default function Footer() {
           </Button>
         </div>
 
-        <nav className={`${styles.column} ${styles.explore}`} aria-labelledby="footer-explore">
+        <nav className={`${styles.column} ${styles.explore}`} aria-labelledby="footer-explore" data-reveal>
           <h2 id="footer-explore" className={styles.heading}>
             Explore
           </h2>
@@ -49,7 +49,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <nav className={`${styles.column} ${styles.courses}`} aria-labelledby="footer-courses">
+        <nav className={`${styles.column} ${styles.courses}`} aria-labelledby="footer-courses" data-reveal>
           <h2 id="footer-courses" className={styles.heading}>
             Courses
           </h2>
@@ -64,7 +64,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <div className={`${styles.column} ${styles.contactColumn}`}>
+        <div className={`${styles.column} ${styles.contactColumn}`} data-reveal>
           <h2 className={styles.heading}>Get in Touch</h2>
           <ul className={styles.contact}>
             <li>

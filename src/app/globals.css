@@ -45,3 +45,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/*
+ * Elements GSAP animates in start hidden so they don't flash before hydration.
+ * Reduced-motion users and no-JS visitors (see root layout) always see them.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal],
+  [data-intro] {
+    visibility: hidden;
+  }
+}

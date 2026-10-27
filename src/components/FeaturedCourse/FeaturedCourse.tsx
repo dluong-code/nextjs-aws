@@ -73,7 +73,7 @@ export default function FeaturedCourse({
   return (
     <section className={styles.section} aria-labelledby="featured-course-heading">
       <div className={styles.inner}>
-        <header className={styles.intro}>
+        <header className={styles.intro} data-reveal>
           <h2 id="featured-course-heading" className={styles.heading}>
             {title}
           </h2>
@@ -83,7 +83,7 @@ export default function FeaturedCourse({
           </Link>
         </header>
 
-        <div className={styles.slider}>
+        <div className={styles.slider} data-reveal>
           <Slick
             ref={sliderRef}
             key={slidesToShow}

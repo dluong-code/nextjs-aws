@@ -47,21 +47,21 @@ export default function AboutIntro({ title, description, cta, stats, image }: Ab
   return (
     <section className={styles.section} aria-labelledby="about-intro-heading">
       <div className={styles.layout}>
-        <div className={styles.media}>
+        <div className={styles.media} data-reveal>
           <picture>
             <source media="(min-width: 1024px)" srcSet={desktopSrcSet} sizes={desktopSizes} />
             <img {...mobileImageProps} alt={alt} className={styles.image} />
           </picture>
         </div>
 
-        <div className={styles.text}>
+        <div className={styles.text} data-reveal>
           <h2 id="about-intro-heading" className={styles.title}>
             {title}
           </h2>
           <p className={styles.description}>{description}</p>
         </div>
 
-        <div className={styles.cta}>
+        <div className={styles.cta} data-reveal>
           <Button as="link" href={cta.href} withArrow>
             {cta.label}
           </Button>
@@ -69,7 +69,7 @@ export default function AboutIntro({ title, description, cta, stats, image }: Ab
 
         <ul className={styles.stats}>
           {stats.map(({ value, label }) => (
-            <li key={label} className={styles.stat}>
+            <li key={label} className={styles.stat} data-reveal>
               <span className={styles.statValue}>{value}</span>
               <span className={styles.statLabel}>{label}</span>
             </li>

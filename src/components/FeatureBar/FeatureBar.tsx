@@ -20,7 +20,7 @@ export default function FeatureBar({ features, label = "Why train with us" }: Fe
     <section className={styles.featureBar} aria-label={label}>
       <ul className={styles.list}>
         {features.map(({ id, icon, title, shortTitle, description }) => (
-          <li key={id} className={styles.item}>
+          <li key={id} className={styles.item} data-reveal>
             <span className={styles.iconCircle}>{icon}</span>
 
             <div className={styles.text}>

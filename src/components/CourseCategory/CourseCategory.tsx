@@ -24,7 +24,7 @@ export default function CourseCategory({ title, subtitle, categories }: CourseCa
   return (
     <section className={styles.section} aria-labelledby="course-category-heading">
       <div className={styles.inner}>
-        <header className={styles.intro}>
+        <header className={styles.intro} data-reveal>
           <h2 id="course-category-heading" className={styles.heading}>
             {title}
           </h2>
@@ -33,7 +33,7 @@ export default function CourseCategory({ title, subtitle, categories }: CourseCa
 
         <ul className={styles.grid}>
           {categories.map(({ id, title, description, href, ctaLabel = "View Courses", image }) => (
-            <li key={id} className={styles.card}>
+            <li key={id} className={styles.card} data-reveal>
               <div className={styles.media}>
                 <Image
                   src={image.src}

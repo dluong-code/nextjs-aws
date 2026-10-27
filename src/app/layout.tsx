@@ -26,7 +26,10 @@ const script = Allura({
 });
 
 export const metadata: Metadata = {
-  title: "TL Nails Academy",
+  title: {
+    default: "TL Nails Academy",
+    template: "%s | TL Nails Academy",
+  },
   description: "Professional, hands-on nail education.",
 };
 

@@ -46,10 +46,25 @@ export default function ScrollReveal() {
         if (aboveFold.length) reveal(aboveFold, 0.6);
 
         ScrollTrigger.batch(belowFold, {
-          start: "top 90%",
+          // clamp() keeps triggers near the page bottom (e.g. the footer)
+          // reachable even if they'd otherwise start past the max scroll
+          start: "clamp(top 90%)",
           once: true,
           onEnter: (batch) => reveal(batch),
         });
+
+        // Sliders and images settle after hydration and shift content; re-measure
+        // trigger positions whenever the page height changes
+        let lastHeight = document.body.scrollHeight;
+        const observer = new ResizeObserver(() => {
+          const height = document.body.scrollHeight;
+          if (height === lastHeight) return;
+          lastHeight = height;
+          ScrollTrigger.refresh();
+        });
+        observer.observe(document.body);
+
+        return () => observer.disconnect();
       });
     },
     { dependencies: [pathname], revertOnUpdate: true },

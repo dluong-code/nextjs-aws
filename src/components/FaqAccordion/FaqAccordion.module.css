@@ -1,0 +1,203 @@
+.section {
+  width: 100%;
+  background-color: var(--color-cream);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Mobile & tablet first: one column, items in order */
+.inner {
+  display: grid;
+  gap: 12px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.item {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  transition:
+    background-color 0.4s,
+    border-color 0.4s;
+}
+
+.open {
+  background-color: var(--color-blush);
+  border-color: var(--color-blush-line);
+}
+
+.heading {
+  font: inherit;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 16px 16px 18px;
+  font: inherit;
+  text-align: left;
+  color: var(--color-ink);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+.question {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Plus that turns into a filled minus: the vertical bar folds flat as the circle spins */
+.icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  color: var(--color-copper);
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  transition:
+    transform 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 0.35s,
+    border-color 0.35s,
+    color 0.35s;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -5.5px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.icon::after {
+  transform: rotate(90deg);
+}
+
+.open .icon {
+  color: var(--color-cream);
+  background-color: var(--color-rose);
+  border-color: var(--color-rose);
+  transform: rotate(180deg);
+}
+
+.open .icon::after {
+  transform: rotate(0deg);
+}
+
+/* Closed end state; GSAP animates height between the two */
+.panel {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.open .panel {
+  height: auto;
+  visibility: visible;
+}
+
+.answer {
+  padding: 0 18px 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding: 40px 40px 80px;
+  }
+
+  .trigger {
+    padding: 18px 18px 18px 22px;
+  }
+
+  .question {
+    font-size: 19px;
+  }
+
+  .answer {
+    padding: 0 22px 22px;
+  }
+}
+
+/* Desktop: two independent columns */
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 20px;
+    padding: 56px 40px 96px;
+  }
+
+  .column {
+    gap: 14px;
+  }
+
+  .trigger {
+    padding: 20px 20px 20px 24px;
+  }
+
+  .question {
+    font-size: 20px;
+  }
+
+  .answer {
+    max-width: 600px;
+    padding: 0 24px 24px;
+    font-size: 16px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:not(.open):hover {
+    border-color: rgb(163 123 81 / 0.45);
+  }
+
+  .item:not(.open):hover .icon {
+    background-color: rgb(163 123 81 / 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .icon,
+  .icon::before,
+  .icon::after {
+    transition: none;
+  }
+}

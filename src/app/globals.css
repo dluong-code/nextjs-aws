@@ -9,6 +9,14 @@
   --color-sage: #c9cbb8;
   --color-stone: #ddd6cb;
   --color-divider: rgb(29 29 24 / 0.12);
+  --color-copper: #a37b51;
+  /* Darker copper for small text: meets 4.5:1 contrast on cream */
+  --color-copper-text: #8a6340;
+  --color-rose: #c4806e;
+  --color-blush: #f5e2da;
+  --color-blush-line: #ecc8bb;
+  --color-card: #f8f5ef;
+  --color-moss: #6b6a51;
 
   --background: var(--color-cream);
   --foreground: var(--color-ink);

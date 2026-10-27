@@ -21,7 +21,9 @@
   outline-offset: 3px;
 }
 
-.light:focus-visible {
+.light:focus-visible,
+.dark:focus-visible,
+.outlineLight:focus-visible {
   outline-color: var(--color-cream);
 }
 
@@ -52,6 +54,18 @@
   background-color: var(--color-cream);
   border-color: var(--color-cream);
   color: var(--color-ink);
+}
+
+.dark {
+  background-color: rgb(52 54 40 / 0.85);
+  border-color: rgb(244 240 232 / 0.35);
+  color: var(--color-cream);
+}
+
+.outlineLight {
+  background-color: transparent;
+  border-color: rgb(244 240 232 / 0.75);
+  color: var(--color-cream);
 }
 
 /* Shapes */
@@ -96,6 +110,17 @@
   .light:not(:disabled):hover {
     background-color: transparent;
     color: var(--color-cream);
+  }
+
+  .dark:not(:disabled):hover {
+    background-color: rgb(52 54 40);
+    border-color: var(--color-cream);
+  }
+
+  .outlineLight:not(:disabled):hover {
+    background-color: var(--color-cream);
+    border-color: var(--color-cream);
+    color: var(--color-ink);
   }
 
   .button:not(:disabled):hover .arrow {

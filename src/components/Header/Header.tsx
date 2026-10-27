@@ -8,7 +8,15 @@ import Logo from "@/components/Logo";
 import { NAV_LINKS } from "@/config/navigation";
 import styles from "./Header.module.css";
 
-export default function Header() {
+type HeaderProps = {
+  /**
+   * "overlay" floats over the hero on desktop (homepage);
+   * "solid" sits in the normal flow above the page content.
+   */
+  variant?: "solid" | "overlay";
+};
+
+export default function Header({ variant = "solid" }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,7 +34,7 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${variant === "overlay" ? styles.overlay : ""}`}>
       <div className={styles.inner}>
         <Logo onClick={closeMenu} />
 
@@ -52,6 +60,10 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
+          <Button as="link" href="/courses" shape="pill" size="sm" withArrow className={styles.cta} onClick={closeMenu}>
+            Book a Course
+          </Button>
+
           <button
             type="button"
             className={styles.menuButton}
@@ -62,18 +74,6 @@ export default function Header() {
           >
             <span className={styles.menuIcon} aria-hidden="true" />
           </button>
-
-          <Button
-            as="link"
-            href="/courses"
-            shape="pill"
-            size="sm"
-            withArrow
-            className={styles.cta}
-            onClick={closeMenu}
-          >
-            Book a Course
-          </Button>
         </div>
       </div>
     </header>

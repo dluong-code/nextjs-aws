@@ -134,9 +134,9 @@
   }
 }
 
-/* Desktop: static inline nav, header floats over the slider with a fading gradient */
+/* Desktop: static inline nav. The overlay variant floats over the hero with a fading gradient */
 @media (min-width: 1024px) {
-  .header {
+  .overlay {
     position: absolute;
     top: 0;
     left: 0;

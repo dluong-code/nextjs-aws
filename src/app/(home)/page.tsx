@@ -1,10 +1,8 @@
 import AboutIntro, { type AboutIntroProps } from "@/components/AboutIntro";
 import { type Course } from "@/components/CourseCard";
 import CourseCategory, { type CourseCategoryItem } from "@/components/CourseCategory";
-import Footer from "@/components/Footer";
 import FeaturedCourse from "@/components/FeaturedCourse";
 import FeatureBar, { type Feature } from "@/components/FeatureBar";
-import Header from "@/components/Header";
 import { ConfidenceIcon, HeartBadgeIcon, PolishIcon, SproutStarIcon } from "@/components/icons";
 import Slider, { type Slide } from "@/components/Slider";
 
@@ -74,8 +72,8 @@ const COURSE_CATEGORIES: CourseCategoryItem[] = [
     description: "Start your nail journey with the essentials.",
     href: "/courses/beginner",
     image: {
-      src: "/courses/beginner.jpg",
-      alt: "Close-up of a nail technician shaping natural nails.",
+      src: "/courses/beginner-1.jpg",
+      alt: "Glossy nude almond-shaped nails resting on a stone surface.",
     },
   },
   {
@@ -84,7 +82,7 @@ const COURSE_CATEGORIES: CourseCategoryItem[] = [
     description: "Build confidence and refine your technique.",
     href: "/courses/skill-development",
     image: {
-      src: "/courses/skill-development.jpg",
+      src: "/courses/skill-development-1.jpg",
       alt: "Gel polish being applied with a fine brush.",
     },
   },
@@ -94,7 +92,7 @@ const COURSE_CATEGORIES: CourseCategoryItem[] = [
     description: "Take your skills to the next level and specialise.",
     href: "/courses/advanced",
     image: {
-      src: "/courses/advanced.jpg",
+      src: "/courses/advanced-1.jpg",
       alt: "A collection of soft pink almond nail tips with marble art.",
     },
   },
@@ -111,7 +109,7 @@ const FEATURED_COURSES: Course[] = [
     level: "Beginner Friendly",
     certificate: true,
     image: {
-      src: "/courses/beginner.jpg",
+      src: "/courses/beginner-1.jpg",
       alt: "Glossy nude gel polish on almond-shaped nails.",
     },
   },
@@ -125,7 +123,7 @@ const FEATURED_COURSES: Course[] = [
     level: "Beginner Friendly",
     certificate: true,
     image: {
-      src: "/courses/skill-development.jpg",
+      src: "/courses/skill-development-1.jpg",
       alt: "Builder gel being applied to a natural nail with a fine brush.",
     },
   },
@@ -139,7 +137,7 @@ const FEATURED_COURSES: Course[] = [
     level: "All Levels",
     certificate: true,
     image: {
-      src: "/courses/advanced.jpg",
+      src: "/courses/advanced-1.jpg",
       alt: "Pink almond nail tips with marble and gold-leaf nail art.",
     },
   },
@@ -153,8 +151,8 @@ const FEATURED_COURSES: Course[] = [
     level: "All Levels",
     certificate: false,
     image: {
-      src: "/courses/mentoring.jpg",
-      alt: "Smiling nail educator in a TL Nails Academy apron.",
+      src: "/courses/mentoring-1.jpg",
+      alt: "The TL Nails Academy studio with sage velvet chairs and marble nail stations.",
     },
   },
 ];
@@ -180,19 +178,15 @@ const ABOUT_INTRO: AboutIntroProps = {
 export default function Home() {
   return (
     <>
-      <Header />
-      <main>
-        <Slider slides={HERO_SLIDES} />
-        <FeatureBar features={FEATURES} />
-        <CourseCategory
-          title="Find the right course for you"
-          subtitle="Whether you're just starting or ready to take your skills further, there's a course for you."
-          categories={COURSE_CATEGORIES}
-        />
-        <FeaturedCourse courses={FEATURED_COURSES} />
-        <AboutIntro {...ABOUT_INTRO} />
-      </main>
-      <Footer />
+      <Slider slides={HERO_SLIDES} />
+      <FeatureBar features={FEATURES} />
+      <CourseCategory
+        title="Find the right course for you"
+        subtitle="Whether you're just starting or ready to take your skills further, there's a course for you."
+        categories={COURSE_CATEGORIES}
+      />
+      <FeaturedCourse courses={FEATURED_COURSES} />
+      <AboutIntro {...ABOUT_INTRO} />
     </>
   );
 }

@@ -1,4 +1,6 @@
 .slider {
+  /* Left inset shared by the slide text and the dots so they stay aligned */
+  --inset: 20px;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -10,7 +12,7 @@
   display: flex;
   align-items: center;
   min-height: 520px;
-  padding: 48px 20px 72px;
+  padding: 48px 20px 72px var(--inset);
   isolation: isolate;
 }
 
@@ -99,7 +101,7 @@
 .slider :global(.slick-dots) {
   position: absolute;
   bottom: 24px;
-  left: 20px;
+  left: var(--inset);
   display: flex !important;
   gap: 10px;
   list-style: none;
@@ -148,13 +150,13 @@
 }
 
 @media (min-width: 768px) {
-  .slide {
-    min-height: 560px;
-    padding: 64px 40px 80px;
+  .slider {
+    --inset: 40px;
   }
 
-  .slider :global(.slick-dots) {
-    left: 40px;
+  .slide {
+    min-height: 560px;
+    padding: 64px 40px 80px var(--inset);
   }
 }
 
@@ -162,7 +164,7 @@
 @media (min-width: 1024px) {
   .slide {
     min-height: 680px;
-    padding: 140px 40px 96px;
+    padding: 140px 40px 96px var(--inset);
   }
 
   .media {
@@ -183,7 +185,7 @@
 }
 
 @media (min-width: 1440px) {
-  .slide {
-    padding-left: max(40px, calc((100vw - 1440px) / 2 + 40px));
+  .slider {
+    --inset: max(40px, calc((100vw - 1440px) / 2 + 40px));
   }
 }

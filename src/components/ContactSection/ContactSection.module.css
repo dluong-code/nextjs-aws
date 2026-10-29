@@ -1,0 +1,313 @@
+/* Mobile first: intro copy, then the form card. The photo joins from 600px up. */
+.section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--color-cream);
+}
+
+/* Soft blush glow behind the form for warmth */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 38%;
+  right: -30%;
+  z-index: -1;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, var(--color-blush) 0%, rgb(245 226 218 / 0) 68%);
+  pointer-events: none;
+}
+
+.inner {
+  display: grid;
+  gap: 36px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+.intro {
+  display: grid;
+  gap: 32px;
+}
+
+.eyebrow {
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-copper-text);
+}
+
+.heading {
+  position: relative;
+  display: inline-block;
+  padding-right: 0.4em;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 11vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+
+/* Handwritten aside, tucked against the end of the heading */
+.script {
+  position: absolute;
+  right: -0.1em;
+  bottom: -0.7em;
+  font-family: var(--font-script);
+  font-size: clamp(36px, 8vw, 56px);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-rose);
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+.description {
+  max-width: 480px;
+  margin-top: 40px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 22px;
+}
+
+.socialLabel {
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.socialLinks {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.socialLink {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  color: var(--color-copper);
+  border: 1px solid rgb(163 123 81 / 0.4);
+  border-radius: 50%;
+  transition:
+    background-color 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+/* Photo in an arched frame that echoes the studio's arched shelving */
+.visual {
+  position: relative;
+  display: none;
+}
+
+.media {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 999px 999px 14px 14px;
+  background-color: var(--color-sand);
+}
+
+.image {
+  object-fit: cover;
+  object-position: 30% center;
+}
+
+/* Rotating badge with a heart at its centre */
+.sticker {
+  position: absolute;
+  bottom: 18px;
+  left: -26px;
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  color: var(--color-cream);
+  background-color: var(--color-olive);
+  border-radius: 50%;
+  box-shadow: 0 12px 30px -12px rgb(29 29 24 / 0.45);
+}
+
+.stickerRing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotate 22s linear infinite;
+}
+
+.stickerText {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.stickerHeart {
+  width: 26px;
+  height: 26px;
+  fill: var(--color-rose);
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  position: relative;
+  padding: 28px 20px 24px;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  box-shadow: 0 30px 60px -36px rgb(67 75 54 / 0.35);
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.cardCopy {
+  margin: 8px 0 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+/* Tablet: copy beside the arched photo, form underneath */
+@media (min-width: 600px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    align-items: center;
+  }
+
+  .visual {
+    display: block;
+    height: 300px;
+  }
+
+  .script {
+    right: -0.55em;
+    bottom: -0.05em;
+  }
+}
+
+@media (min-width: 768px) {
+  .inner {
+    gap: 48px;
+    padding: 56px 40px 88px;
+  }
+
+  .intro {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 48px;
+  }
+
+  .visual {
+    height: 340px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 40px;
+  }
+
+  .cardTitle {
+    font-size: 30px;
+  }
+}
+
+/* Desktop: intro and photo on the left, the form card on the right */
+@media (min-width: 1024px) {
+  .section::before {
+    top: -10%;
+    right: -8%;
+    width: 900px;
+    height: 900px;
+  }
+
+  .inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+    gap: 72px;
+    padding: 72px 40px 104px;
+  }
+
+  .intro {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    align-items: end;
+    gap: 32px;
+  }
+
+  .visual {
+    height: 280px;
+  }
+
+  .description {
+    font-size: 17px;
+  }
+
+  .card {
+    margin-top: 8px;
+    padding: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr) 230px;
+  }
+
+  .visual {
+    height: 320px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .socialLink:hover {
+    color: var(--color-cream);
+    background-color: var(--color-copper);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stickerRing {
+    animation: none;
+  }
+
+  .socialLink {
+    transition: none;
+  }
+}

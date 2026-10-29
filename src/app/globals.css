@@ -13,6 +13,8 @@
   /* Darker copper for small text: meets 4.5:1 contrast on cream */
   --color-copper-text: #8a6340;
   --color-rose: #c4806e;
+  /* Darker rose for small text: meets 4.5:1 contrast on cream */
+  --color-rose-text: #9f5546;
   --color-blush: #f5e2da;
   --color-blush-line: #ecc8bb;
   --color-card: #f8f5ef;

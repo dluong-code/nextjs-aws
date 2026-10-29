@@ -50,6 +50,13 @@
   color: var(--color-ink);
 }
 
+/* Soft copper outline on light backgrounds */
+.outline {
+  background-color: #fffdf9;
+  border-color: rgb(163 123 81 / 0.55);
+  color: var(--color-ink);
+}
+
 .light {
   background-color: var(--color-cream);
   border-color: var(--color-cream);
@@ -105,6 +112,11 @@
   .secondary:not(:disabled):hover {
     background-color: var(--color-ink);
     color: var(--color-cream);
+  }
+
+  .outline:not(:disabled):hover {
+    background-color: var(--color-blush);
+    border-color: var(--color-copper);
   }
 
   .light:not(:disabled):hover {

@@ -1,0 +1,259 @@
+/* Mobile & tablet first: the portrait floats right so the story wraps around it */
+.section {
+  --inset: 20px;
+  /* Desktop indents the copy so the eyebrow sits in its own gutter */
+  --gutter: 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #faf5ef;
+}
+
+/* Cream canvas with blush brushstrokes sweeping up from the bottom right. The tall
+   mobile and tablet artwork keeps its proportions at the section's full height, and
+   its left edge fades out so it melts into the background colour. */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  aspect-ratio: 258 / 885;
+  background: url("/about/story-bg-mobile.jpg") no-repeat right bottom / cover;
+  mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  pointer-events: none;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 20px 48px var(--inset);
+}
+
+/* Clears the floated portrait so the section wraps it */
+.inner::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.media {
+  position: relative;
+  float: right;
+  width: 37%;
+  aspect-ratio: 9 / 10;
+  margin: 0 0 12px 16px;
+  overflow: hidden;
+  background-color: var(--color-sand);
+  border-radius: 6px;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.header {
+  margin-bottom: 14px;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-rose-text);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 9vw, 56px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.body {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.body > p + p {
+  margin-top: 12px;
+}
+
+.body strong {
+  font-weight: 600;
+}
+
+/* Plain-text name with a hand-drawn heart; the role sits indented beneath */
+.signOff {
+  clear: both;
+  margin-top: 20px;
+}
+
+.name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-style: italic;
+  line-height: 1.1;
+  color: #7a3b31;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--color-rose);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.role {
+  margin: 4px 0 0 48px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-rose-text);
+}
+
+/* Tablet: a taller portrait running alongside the first two paragraphs */
+@media (min-width: 600px) {
+  .section::before {
+    aspect-ratio: 380 / 885;
+    background-image: url("/about/story-bg-tablet.jpg");
+  }
+
+  .media {
+    width: 32%;
+    aspect-ratio: 2 / 3;
+    margin: 0 0 16px 28px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .name {
+    font-size: 34px;
+  }
+
+  .role {
+    margin-left: 56px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    --inset: 40px;
+  }
+
+  .inner {
+    padding: 56px 40px 64px var(--inset);
+  }
+}
+
+/* Desktop: indented copy on the left, a wide portrait filling the right */
+@media (min-width: 1024px) {
+  .section {
+    --gutter: 140px;
+    background: #fcf8f2 url("/about/story-bg-desktop.jpg") no-repeat right bottom / cover;
+  }
+
+  .section::before {
+    content: none;
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 56px;
+    padding: 32px 40px 40px var(--inset);
+  }
+
+  .header,
+  .body {
+    grid-column: 1;
+    padding-left: var(--gutter);
+  }
+
+  .header {
+    margin-bottom: 18px;
+  }
+
+  /* "MY STORY" in the gutter, a rule leading into the copy and a short rule beneath */
+  .eyebrow {
+    display: grid;
+    grid-template-columns: var(--gutter) auto;
+    align-items: start;
+    margin: 0 0 6px calc(-1 * var(--gutter));
+  }
+
+  .eyebrow::after {
+    content: "";
+    width: 56px;
+    height: 1px;
+    margin-top: 0.55em;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+
+  .eyebrowText::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 1px;
+    margin-top: 16px;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+
+  .title {
+    font-size: clamp(48px, 4vw, 58px);
+  }
+
+  .body {
+    max-width: calc(620px + var(--gutter));
+    font-size: 16px;
+  }
+
+  .media {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    float: none;
+    width: auto;
+    min-height: 340px;
+    aspect-ratio: auto;
+    margin: 0;
+  }
+
+  .image {
+    object-position: 50% 30%;
+  }
+
+  .signOff {
+    margin-top: 18px;
+  }
+
+  .name {
+    margin-left: 8px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    --inset: max(40px, calc((100vw - 1440px) / 2 + 40px));
+  }
+}

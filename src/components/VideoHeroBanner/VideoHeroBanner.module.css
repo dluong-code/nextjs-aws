@@ -147,9 +147,10 @@
   mask-image: linear-gradient(to right, transparent 0%, #000 35%);
 }
 
+/* Tall portrait: framed from her face down to her hips */
 .posterImage {
   object-fit: cover;
-  object-position: 60% 0%;
+  object-position: 70% 52%;
 }
 
 .cardCopy {

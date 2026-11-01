@@ -67,6 +67,14 @@
   color: var(--color-ink);
 }
 
+.compact .content {
+  max-width: 620px;
+}
+
+.compact .title {
+  font-size: clamp(36px, 5.6vw, 64px);
+}
+
 .description {
   max-width: 440px;
   margin-top: 20px;

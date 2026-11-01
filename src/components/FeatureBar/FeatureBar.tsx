@@ -13,11 +13,23 @@ export type Feature = {
 type FeatureBarProps = {
   features: Feature[];
   label?: string;
+  /**
+   * "badge" (default): icons in filled circles, compact columns on mobile.
+   * "plain": outline icons only, a list on mobile and four columns from tablet up.
+   */
+  variant?: "badge" | "plain";
 };
 
-export default function FeatureBar({ features, label = "Why train with us" }: FeatureBarProps) {
+export default function FeatureBar({
+  features,
+  label = "Why train with us",
+  variant = "badge",
+}: FeatureBarProps) {
   return (
-    <section className={styles.featureBar} aria-label={label}>
+    <section
+      className={`${styles.featureBar} ${variant === "plain" ? styles.plain : ""}`}
+      aria-label={label}
+    >
       <ul className={styles.list}>
         {features.map(({ id, icon, title, shortTitle, description }) => (
           <li key={id} className={styles.item} data-reveal>

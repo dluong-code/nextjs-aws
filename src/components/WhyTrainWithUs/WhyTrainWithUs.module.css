@@ -1,0 +1,145 @@
+/* Mobile first: heading then a simple icon list */
+.section {
+  background-color: var(--color-cream);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 44px 20px 52px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 6.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.list {
+  display: grid;
+  gap: 4px;
+  list-style: none;
+}
+
+.item {
+  padding: 8px 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-copper);
+}
+
+.icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.description {
+  display: none;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+/* Tablet: four columns, icon above title, divided by fine rules */
+@media (min-width: 600px) {
+  .inner {
+    padding: 56px 32px 64px;
+  }
+
+  .heading {
+    margin-bottom: 32px;
+  }
+
+  .list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .item {
+    padding: 4px 12px;
+  }
+
+  .item + .item {
+    border-left: 1px solid var(--color-divider);
+  }
+
+  .head {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+}
+
+/* Desktop: icon beside a two-line title, description underneath */
+@media (min-width: 1024px) {
+  .inner {
+    padding: 64px 40px 80px;
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .item {
+    padding: 4px 28px;
+  }
+
+  .item:first-child {
+    padding-left: 0;
+  }
+
+  .item:last-child {
+    padding-right: 0;
+  }
+
+  .head {
+    flex-direction: row;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    max-width: 8em;
+    font-size: 18px;
+  }
+
+  .description {
+    display: block;
+    margin-top: 14px;
+  }
+}

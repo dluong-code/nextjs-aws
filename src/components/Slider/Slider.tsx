@@ -36,6 +36,8 @@ export type Slide = {
 type SliderProps = {
   slides: Slide[];
   settings?: Settings;
+  /** "compact" uses a smaller heading so longer titles fit on two lines */
+  titleSize?: "default" | "compact";
 };
 
 const DEFAULT_SETTINGS: Settings = {
@@ -95,7 +97,7 @@ function animateSlide(slide: Element, splits: Map<Element, SplitText>, delay = 0
   return tl;
 }
 
-export default function Slider({ slides, settings }: SliderProps) {
+export default function Slider({ slides, settings, titleSize = "default" }: SliderProps) {
   const hasMultipleSlides = slides.length > 1;
   const sectionRef = useRef<HTMLElement>(null);
   const splitsRef = useRef(new Map<Element, SplitText>());
@@ -153,7 +155,7 @@ export default function Slider({ slides, settings }: SliderProps) {
   return (
     <section
       ref={sectionRef}
-      className={styles.slider}
+      className={`${styles.slider} ${titleSize === "compact" ? styles.compact : ""}`}
       aria-roledescription="carousel"
       aria-label="Highlights"
     >

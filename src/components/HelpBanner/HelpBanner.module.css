@@ -1,0 +1,125 @@
+/* Mobile first: centred copy on blush, no photo */
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(105deg, #f6e6df 0%, #f8ede8 50%, #f3e2da 100%);
+}
+
+.media {
+  display: none;
+}
+
+.image {
+  object-fit: cover;
+  object-position: 60% center;
+}
+
+.sprig {
+  position: absolute;
+  right: -24px;
+  bottom: -20px;
+  z-index: -1;
+  width: 120px;
+  fill: none;
+  stroke: var(--color-copper);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.3;
+}
+
+.content {
+  max-width: 480px;
+  padding: 44px 24px 48px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-rose-text);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 7vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.cta {
+  margin-top: 22px;
+}
+
+/* Tablet: photo on the left fading into the blush, copy centred on the right */
+@media (min-width: 600px) {
+  .banner {
+    justify-content: flex-end;
+    min-height: 280px;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: -1;
+    display: block;
+    width: 38%;
+    mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+  }
+
+  .content {
+    width: 64%;
+    max-width: none;
+    padding: 48px 32px 52px;
+  }
+
+  .sprig {
+    width: 140px;
+  }
+}
+
+/* Desktop: copy left-aligned beside the photo */
+@media (min-width: 1024px) {
+  .banner {
+    justify-content: flex-start;
+    min-height: 300px;
+  }
+
+  .media {
+    width: 40%;
+    mask-image: linear-gradient(to right, #000 60%, transparent 100%);
+  }
+
+  .content {
+    width: auto;
+    max-width: 600px;
+    margin-left: calc(40% + 8px);
+    padding: 56px 40px;
+    text-align: left;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .sprig {
+    right: 8%;
+    bottom: -10px;
+    width: 170px;
+  }
+}

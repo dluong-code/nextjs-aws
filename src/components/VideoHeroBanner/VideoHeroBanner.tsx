@@ -3,8 +3,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import Image, { getImageProps } from "next/image";
+import Image from "next/image";
 import { useRef, useState } from "react";
+import ArtDirectedImage, { type ArtDirectedSources } from "@/components/ArtDirectedImage";
 import Button from "@/components/Button";
 import { MOTION } from "@/lib/motion";
 import VideoModal, { type Video } from "./VideoModal";
@@ -15,12 +16,6 @@ gsap.registerPlugin(useGSAP, SplitText);
 type ImageSource = {
   src: string;
   alt: string;
-};
-
-type SizedImage = {
-  src: string;
-  width: number;
-  height: number;
 };
 
 type Cta = {
@@ -36,11 +31,7 @@ type VideoHeroBannerProps = {
   primaryCta?: Cta;
   secondaryCta?: Cta;
   /** Decorative studio scene behind the whole banner, art-directed per breakpoint */
-  background: {
-    mobile: SizedImage;
-    tablet: SizedImage;
-    desktop: SizedImage;
-  };
+  background: ArtDirectedSources;
   video: Video & {
     heading: string;
     description?: string;
@@ -59,7 +50,6 @@ export default function VideoHeroBanner({
   background,
   video,
 }: VideoHeroBannerProps) {
-  const backgroundSources = getBackgroundSources(background);
 
   const sectionRef = useRef<HTMLElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -153,11 +143,7 @@ export default function VideoHeroBanner({
   return (
     <section ref={sectionRef} className={styles.banner} aria-labelledby="video-hero-title">
       <div className={styles.backdrop} data-intro="media" aria-hidden="true">
-        <picture>
-          <source media="(min-width: 1024px)" srcSet={backgroundSources.desktop} />
-          <source media="(min-width: 600px)" srcSet={backgroundSources.tablet} />
-          <img {...backgroundSources.img} alt="" className={styles.backdropImage} />
-        </picture>
+        <ArtDirectedImage sources={background} className={styles.backdropImage} />
       </div>
 
       <div className={styles.inner}>
@@ -244,13 +230,4 @@ export default function VideoHeroBanner({
       <VideoModal video={video} isOpen={isPlaying} onClose={() => setIsPlaying(false)} />
     </section>
   );
-}
-
-/** Builds a <picture>'s sources so each breakpoint downloads only its own optimised image. */
-function getBackgroundSources({ mobile, tablet, desktop }: VideoHeroBannerProps["background"]) {
-  const common = { alt: "", sizes: "100vw", loading: "eager" as const, fetchPriority: "high" as const };
-  const srcSetFor = (image: SizedImage) => getImageProps({ ...common, ...image }).props.srcSet;
-  const { props: img } = getImageProps({ ...common, ...mobile });
-
-  return { desktop: srcSetFor(desktop), tablet: srcSetFor(tablet), img };
 }

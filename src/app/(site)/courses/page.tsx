@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import CoursesHero from "@/components/CoursesHero";
 import CourseShowcase, { type CourseSummary } from "@/components/CourseShowcase";
 import FeatureBar, { type Feature } from "@/components/FeatureBar";
 import HelpBanner from "@/components/HelpBanner";
 import { AwardIcon, DiamondIcon, GraduationCapIcon, LayersIcon, LeafIcon, UsersIcon } from "@/components/icons";
-import Slider, { type Slide } from "@/components/Slider";
 import WhyTrainWithUs, { type Reason } from "@/components/WhyTrainWithUs";
 
 export const metadata: Metadata = {
@@ -11,45 +11,6 @@ export const metadata: Metadata = {
   description:
     "Professional nail courses at TL Nails Academy, from Beginners Gel Polish to The Master Class. Build real skills with expert, hands-on training.",
 };
-
-const HERO_SLIDES: Slide[] = [
-  {
-    id: "nail-courses",
-    eyebrow: "Professional Nail Training",
-    title: "Nail Courses\nat TL Nails Academy",
-    description: "Build real skills, confidence and a successful nail career with expert, hands-on training.",
-    primaryCta: { label: "Explore Courses", href: "#our-courses" },
-    secondaryCta: { label: "Contact Us", href: "/contact" },
-    image: {
-      src: "/TL_Nails_Hero_04_nail_art_collection.png",
-      alt: "A row of glossy nude almond nails with marbled nail art on a speckled stone surface.",
-    },
-  },
-  {
-    id: "small-classes",
-    eyebrow: "Small Classes, Real Practice",
-    title: "Learn Hands-On\nWith Expert Guidance",
-    description: "Practise on real models in small groups, with one-to-one feedback at every step.",
-    primaryCta: { label: "Explore Courses", href: "#our-courses" },
-    secondaryCta: { label: "Contact Us", href: "/contact" },
-    image: {
-      src: "/TL_Nails_Hero_05_educator_training.png",
-      alt: "A smiling nail educator in a TL Nails Academy apron.",
-    },
-  },
-  {
-    id: "certified",
-    eyebrow: "Industry-Recognised Certificates",
-    title: "Train Today.\nGrow Your Career.",
-    description: "Finish every accredited course with a certificate and the confidence to start working.",
-    primaryCta: { label: "Explore Courses", href: "#our-courses" },
-    secondaryCta: { label: "Contact Us", href: "/contact" },
-    image: {
-      src: "/TL_Nails_Hero_03_academy_studio.png",
-      alt: "The TL Nails Academy studio, with the academy's name on the wall.",
-    },
-  },
-];
 
 const FEATURES: Feature[] = [
   { id: "expert-led", icon: <GraduationCapIcon />, title: "Expert-Led Training" },
@@ -61,6 +22,7 @@ const FEATURES: Feature[] = [
 const COURSES: CourseSummary[] = [
   {
     id: "beginners-gel-polish",
+    level: "Beginner",
     title: "Beginners Gel Polish",
     brief: "Build a strong foundation in nail prep, cuticle care and flawless Gel Polish application.",
     href: "/courses/beginners-gel-polish",
@@ -71,6 +33,7 @@ const COURSES: CourseSummary[] = [
   },
   {
     id: "builder-gel",
+    level: "Intermediate",
     title: "Builder Gel Overlay and Extensions",
     brief: "Create strong, natural-looking overlays and extensions with Builder Gel techniques.",
     href: "/courses/builder-gel-overlay-and-extensions",
@@ -82,6 +45,7 @@ const COURSES: CourseSummary[] = [
   },
   {
     id: "hard-gel",
+    level: "Intermediate",
     title: "Hard Gel Extensions",
     brief: "Sculpt durable, beautifully shaped Hard Gel extensions, from form to flawless finish.",
     href: "/courses/hard-gel-extensions",
@@ -93,6 +57,7 @@ const COURSES: CourseSummary[] = [
   },
   {
     id: "acrylics",
+    level: "Intermediate",
     title: "Acrylics",
     brief: "Learn to apply, shape and refine long-lasting acrylic enhancements with confidence.",
     href: "/courses/acrylics",
@@ -104,6 +69,9 @@ const COURSES: CourseSummary[] = [
   },
   {
     id: "master-class",
+    level: "Advanced",
+    featured: true,
+    badge: "Signature Course",
     title: "The Master Class",
     brief: "Take your skills to the next level with advanced techniques, nail art and salon-ready finishes.",
     href: "/courses/the-master-class",
@@ -144,13 +112,24 @@ const REASONS: Reason[] = [
 export default function CoursesPage() {
   return (
     <>
+      <CoursesHero
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Courses" }]}
+        eyebrow="Nails Training Courses"
+        title="Find Your Training Path"
+        description="From the fundamentals to advanced artistry, discover our specialist nail courses and take the next step in your nail career."
+        cta={{ label: "View Courses", targetId: "our-courses" }}
+        background={{
+          mobile: { src: "/banners/courses-hero-mobile.jpg", width: 308, height: 720 },
+          tablet: { src: "/banners/courses-hero-tablet.jpg", width: 820, height: 742 },
+          desktop: { src: "/banners/courses-hero-desktop.jpg", width: 1440, height: 597 },
+        }}
+      />
+      <FeatureBar features={FEATURES} label="What every course includes" variant="plain" />
       <CourseShowcase
         title="Our Courses"
         description="Choose from our range of professional nail courses, designed for all levels, from beginners to those ready to advance their skills."
         courses={COURSES}
       />
-      {/* <Slider slides={HERO_SLIDES} titleSize="compact" /> */}
-      <FeatureBar features={FEATURES} label="What every course includes" variant="plain" />
       <HelpBanner
         eyebrow="Not sure which course is right for you?"
         title="We’re Here to Help"

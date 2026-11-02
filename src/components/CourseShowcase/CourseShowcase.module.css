@@ -1,18 +1,12 @@
 .section {
   width: 100%;
   overflow: hidden;
+  outline: 0;
+  /* Leaves breathing room above the heading when the hero link scrolls here */
+  scroll-margin-top: 0;
   background:
     radial-gradient(ellipse at 50% 0%, rgb(255 255 255 / 0.55) 0%, rgb(255 255 255 / 0) 60%),
     var(--color-cream);
-}
-
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
 }
 
 .inner {
@@ -42,111 +36,22 @@
   color: var(--color-muted);
 }
 
-/* Mobile: a list replaces the carousel */
-.carousel {
-  display: none;
-}
-
-.list {
+/* Mobile: one column of horizontal cards; the featured card is full-bleed vertical */
+.grid {
   display: grid;
-  gap: 10px;
+  gap: 12px;
   list-style: none;
 }
 
-.row {
+.cell {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 8px 14px 8px 8px;
-  background-color: #fff;
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  box-shadow: 0 10px 24px -20px rgb(67 75 54 / 0.45);
-  transition:
-    border-color 0.25s,
-    transform 0.25s;
-}
-
-.row:focus-visible {
-  outline: 2px solid var(--color-olive);
-  outline-offset: 2px;
-}
-
-.rowMedia {
-  position: relative;
-  flex-shrink: 0;
-  width: 72px;
-  height: 56px;
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.image {
-  object-fit: cover;
-}
-
-.rowTitle {
-  flex: 1;
-  font-family: var(--font-serif);
-  font-size: 16px;
-  line-height: 1.25;
-  color: var(--color-ink);
-}
-
-.rowArrow {
-  flex-shrink: 0;
-  color: var(--color-copper);
-}
-
-/* Tablet & desktop: three-up carousel */
-@media (min-width: 600px) {
-  .inner {
-    padding: 64px 32px 64px;
-  }
-
-  .intro {
-    margin-bottom: 36px;
-  }
-
-  .description {
-    font-size: 15px;
-  }
-
-  .list {
-    display: none;
-  }
-
-  .carousel {
-    position: relative;
-    display: block;
-  }
-}
-
-.slider {
-  margin: 0 -8px;
-}
-
-.slider :global(.slick-track) {
-  display: flex;
-}
-
-.slider :global(.slick-slide) {
-  height: auto;
-}
-
-.slider :global(.slick-slide > div) {
-  height: 100%;
-}
-
-.slide {
-  height: 100%;
-  padding: 4px 8px 12px;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 36% minmax(0, 1fr);
+  width: 100%;
   overflow: hidden;
   background-color: #fffdf9;
   border: 1px solid var(--color-line);
@@ -154,50 +59,92 @@
   box-shadow: 0 18px 36px -30px rgb(67 75 54 / 0.55);
   transition:
     transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.4s;
+    box-shadow 0.4s,
+    border-color 0.4s;
 }
 
-.cardMedia {
+.card:focus-within {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 3px;
+}
+
+.media {
   position: relative;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
+  background-color: var(--color-sand);
 }
 
-.cardMedia .image {
+.image {
+  object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.cardBody {
+.body {
   display: flex;
-  flex: 1;
   flex-direction: column;
-  padding: 16px 16px 18px;
+  padding: 14px 14px 16px;
 }
 
-.cardTitle {
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.step {
   font-family: var(--font-serif);
-  font-size: 19px;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--color-rose);
+}
+
+.level {
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-copper-text);
+  background-color: rgb(163 123 81 / 0.1);
+  border-radius: 999px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.15;
   color: var(--color-ink);
 }
 
-.cardBrief {
-  margin-top: 8px;
+/* The title link covers the whole card */
+.link {
+  outline: 0;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.brief {
+  margin-top: 6px;
   font-size: 13px;
   line-height: 1.5;
   color: var(--color-muted);
 }
 
-/* Pinned to the bottom so links line up across cards */
 .learnMore {
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
   gap: 8px;
   margin-top: auto;
-  padding-top: 16px;
-  font-size: 14px;
+  padding-top: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--color-ink);
 }
@@ -213,140 +160,216 @@
   transition: transform 0.25s;
 }
 
-.learnMore:focus-visible {
-  outline: 2px solid var(--color-olive);
-  outline-offset: 3px;
-  border-radius: 2px;
+/* Featured (The Master Class): deep olive with champagne accents */
+.featured {
+  grid-template-columns: 1fr;
+  color: var(--color-cream);
+  background:
+    radial-gradient(circle at 100% 100%, rgb(196 128 110 / 0.28) 0%, rgb(196 128 110 / 0) 55%),
+    #3f4732;
+  border-color: rgb(212 178 130 / 0.45);
+  box-shadow: 0 30px 50px -30px rgb(40 46 30 / 0.85);
 }
 
-/* Arrows appear on desktop, outside the cards */
-.arrow {
-  display: none;
+.featured .media {
+  aspect-ratio: 16 / 9;
 }
 
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-  list-style: none;
+.featured .body {
+  padding: 20px 20px 22px;
 }
 
-.dot {
-  display: block;
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  background: transparent;
-  border: 1px solid rgb(29 29 24 / 0.45);
-  border-radius: 50%;
-  cursor: pointer;
-  transition:
-    background-color 0.25s,
-    border-color 0.25s;
+.featured .step {
+  color: #e2c08d;
 }
 
-.dot[aria-current="true"] {
-  background-color: var(--color-ink);
-  border-color: var(--color-ink);
+.featured .level {
+  color: #f4e3c6;
+  background-color: rgb(226 192 141 / 0.18);
 }
 
-.dot:focus-visible {
-  outline: 2px solid var(--color-olive);
-  outline-offset: 3px;
+.featured .title {
+  font-size: 26px;
+  color: var(--color-cream);
 }
 
-@media (min-width: 1024px) {
+.featured .brief {
+  font-size: 14px;
+  color: rgb(244 240 232 / 0.82);
+}
+
+.featured .learnMore {
+  padding-top: 18px;
+  font-size: 14px;
+  color: #e2c08d;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3f4732;
+  background: linear-gradient(120deg, #f1d9ae 0%, #e2c08d 55%, #f5e4c5 100%);
+  border-radius: 999px;
+  box-shadow: 0 6px 14px -6px rgb(0 0 0 / 0.35);
+}
+
+/* Tablet: 2×2 vertical cards, featured spans the width as a horizontal card */
+@media (min-width: 600px) {
   .inner {
-    padding: 80px 72px 72px;
+    padding: 64px 32px;
   }
 
   .intro {
     margin-bottom: 40px;
   }
 
-  .cardBody {
-    padding: 22px 24px 22px;
+  .description {
+    font-size: 15px;
   }
 
-  .cardTitle {
-    font-size: 24px;
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 
-  .cardBrief {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .body {
+    padding: 20px 22px 22px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .brief {
     font-size: 14px;
   }
 
-  .arrow {
-    position: absolute;
-    top: calc(50% - 30px);
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    color: var(--color-ink);
-    background-color: #fff;
-    border: 1px solid var(--color-line);
-    border-radius: 50%;
-    box-shadow: 0 6px 16px -8px rgb(29 29 24 / 0.35);
-    cursor: pointer;
-    transition:
-      opacity 0.25s,
-      transform 0.25s;
+  .learnMore {
+    padding-top: 18px;
+    font-size: 14px;
   }
 
-  .arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
+  .featuredCell {
+    grid-column: 1 / -1;
   }
 
-  .arrow:focus-visible {
-    outline: 2px solid var(--color-olive);
-    outline-offset: 3px;
+  .featured {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto;
   }
 
-  .prev {
-    left: -56px;
+  .featured .media {
+    aspect-ratio: auto;
+    min-height: 300px;
   }
 
-  .prev svg {
-    transform: rotate(180deg);
+  .featured .body {
+    justify-content: center;
+    padding: 36px 32px;
   }
 
-  .next {
-    right: -56px;
+  .featured .title {
+    font-size: 32px;
+  }
+
+  .featured .learnMore {
+    margin-top: 0;
+    padding-top: 24px;
+  }
+
+  .badge {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+/* Desktop: three across, then one beside the wide featured card */
+@media (min-width: 1024px) {
+  .inner {
+    padding: 88px 40px 96px;
+  }
+
+  .intro {
+    margin-bottom: 48px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .cell {
+    grid-column: span 2;
+  }
+
+  .featuredCell {
+    grid-column: span 4;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .featured {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .featured .media {
+    min-height: 100%;
+  }
+
+  .featured .body {
+    padding: 40px 40px;
+  }
+
+  .featured .title {
+    font-size: clamp(32px, 3vw, 40px);
+  }
+
+  .featured .brief {
+    font-size: 15px;
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
+    border-color: rgb(163 123 81 / 0.4);
     transform: translateY(-4px);
-    box-shadow: 0 26px 40px -28px rgb(67 75 54 / 0.6);
+    box-shadow: 0 28px 44px -28px rgb(67 75 54 / 0.6);
   }
 
-  .card:hover .cardMedia .image {
+  .featured:hover {
+    border-color: rgb(226 192 141 / 0.8);
+    box-shadow: 0 36px 60px -30px rgb(40 46 30 / 0.95);
+  }
+
+  .card:hover .image {
     transform: scale(1.05);
   }
 
-  .learnMore:hover svg {
-    transform: translateX(3px);
-  }
-
-  .arrow:not(:disabled):hover {
-    transform: scale(1.08);
-  }
-
-  .row:hover {
-    border-color: rgb(163 123 81 / 0.45);
-    transform: translateX(2px);
+  .card:hover .learnMore svg {
+    transform: translateX(4px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .cardMedia .image,
-  .row,
+  .image,
   .learnMore svg {
     transition: none;
   }

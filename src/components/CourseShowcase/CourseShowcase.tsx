@@ -1,11 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
-import Slick, { type Settings } from "react-slick";
-import "slick-carousel/slick/slick.css";
-import { ChevronIcon } from "@/components/icons";
 import styles from "./CourseShowcase.module.css";
 
 export type CourseSummary = {
@@ -14,6 +8,12 @@ export type CourseSummary = {
   /** One-sentence brief shown on the card */
   brief: string;
   href: string;
+  /** Short tag such as "Beginner" or "Advanced" */
+  level: string;
+  /** The signature course: always placed last and styled to stand out */
+  featured?: boolean;
+  /** Small label on the featured card, e.g. "Signature Course" */
+  badge?: string;
   image: {
     src: string;
     alt: string;
@@ -29,21 +29,10 @@ type CourseShowcaseProps = {
   courses: CourseSummary[];
 };
 
-const SLIDES_TO_SHOW = 3;
-
-const SLIDER_SETTINGS: Settings = {
-  arrows: false,
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: SLIDES_TO_SHOW,
-  slidesToScroll: 1,
-  swipeToSlide: true,
-};
-
 /**
- * "Our Courses": a three-up card carousel from tablet up, with arrows on
- * desktop; on mobile every course is listed as a compact row instead.
+ * "Our Courses" as a static grid. Desktop: three cards, then a fourth beside
+ * the wide featured card. Tablet: a 2×2 grid with the featured card spanning
+ * the full width beneath. Mobile: compact horizontal cards, featured last.
  */
 export default function CourseShowcase({
   id = "our-courses",
@@ -51,14 +40,17 @@ export default function CourseShowcase({
   description,
   courses,
 }: CourseShowcaseProps) {
-  const sliderRef = useRef<Slick>(null);
-  const [index, setIndex] = useState(0);
-
-  const lastIndex = Math.max(0, courses.length - SLIDES_TO_SHOW);
-  const dotCount = lastIndex + 1;
+  // The featured course always closes the grid, wherever it sits in the data
+  const ordered = [...courses.filter((c) => !c.featured), ...courses.filter((c) => c.featured)];
 
   return (
-    <section id={id} className={styles.section} aria-labelledby={`${id}-heading`}>
+    <section
+      id={id}
+      className={styles.section}
+      aria-labelledby={`${id}-heading`}
+      // Focus target for the hero's "Explore Courses" link
+      tabIndex={-1}
+    >
       <div className={styles.inner}>
         <header className={styles.intro} data-reveal>
           <h2 id={`${id}-heading`} className={styles.heading}>
@@ -67,77 +59,14 @@ export default function CourseShowcase({
           {description && <p className={styles.description}>{description}</p>}
         </header>
 
-        {/* Tablet & desktop: carousel */}
-        <div className={styles.carousel} data-reveal>
-          <button
-            type="button"
-            className={`${styles.arrow} ${styles.prev}`}
-            onClick={() => sliderRef.current?.slickPrev()}
-            disabled={index === 0}
-            aria-label="Previous courses"
-          >
-            <ChevronIcon size={18} />
-          </button>
-
-          <div className={styles.slider}>
-            <Slick
-              ref={sliderRef}
-              {...SLIDER_SETTINGS}
-              beforeChange={(_, next) => setIndex(Math.min(next, lastIndex))}
+        <ul className={styles.grid}>
+          {ordered.map((course, index) => (
+            <li
+              key={course.id}
+              className={`${styles.cell} ${course.featured ? styles.featuredCell : ""}`}
+              data-reveal
             >
-              {courses.map((course) => (
-                <div key={course.id} className={styles.slide}>
-                  <CourseTile course={course} />
-                </div>
-              ))}
-            </Slick>
-          </div>
-
-          <button
-            type="button"
-            className={`${styles.arrow} ${styles.next}`}
-            onClick={() => sliderRef.current?.slickNext()}
-            disabled={index >= lastIndex}
-            aria-label="Next courses"
-          >
-            <ChevronIcon size={18} />
-          </button>
-
-          {dotCount > 1 && (
-            <ul className={styles.dots}>
-              {Array.from({ length: dotCount }, (_, dot) => (
-                <li key={dot}>
-                  <button
-                    type="button"
-                    className={styles.dot}
-                    aria-label={`Show courses from ${dot + 1}`}
-                    aria-current={dot === index ? "true" : undefined}
-                    onClick={() => sliderRef.current?.slickGoTo(dot)}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Mobile: compact list of every course */}
-        <ul className={styles.list}>
-          {courses.map((course) => (
-            <li key={course.id} data-reveal>
-              <Link href={course.href} className={styles.row}>
-                <span className={styles.rowMedia}>
-                  <Image
-                    src={course.image.src}
-                    alt=""
-                    fill
-                    sizes="80px"
-                    className={styles.image}
-                    style={{ objectPosition: course.image.position }}
-                  />
-                </span>
-                <span className={styles.rowTitle}>{course.title}</span>
-                <ChevronIcon size={16} className={styles.rowArrow} />
-              </Link>
+              <CourseCard course={course} step={index + 1} />
             </li>
           ))}
         </ul>
@@ -146,28 +75,47 @@ export default function CourseShowcase({
   );
 }
 
-function CourseTile({ course }: { course: CourseSummary }) {
+function CourseCard({ course, step }: { course: CourseSummary; step: number }) {
+  const { title, brief, href, level, featured, badge, image } = course;
+
   return (
-    <article className={styles.card}>
-      <div className={styles.cardMedia}>
+    <article className={`${styles.card} ${featured ? styles.featured : ""}`}>
+      <div className={styles.media}>
         <Image
-          src={course.image.src}
-          alt={course.image.alt}
+          src={image.src}
+          alt={image.alt}
           fill
-          sizes="(min-width: 1024px) 360px, 32vw"
+          sizes={
+            featured
+              ? "(min-width: 1024px) 380px, (min-width: 600px) 45vw, 100vw"
+              : "(min-width: 1024px) 380px, (min-width: 600px) 45vw, 36vw"
+          }
           className={styles.image}
-          style={{ objectPosition: course.image.position }}
+          style={{ objectPosition: image.position }}
         />
+        {featured && badge && <span className={styles.badge}>{badge}</span>}
       </div>
-      <div className={styles.cardBody}>
-        <h3 className={styles.cardTitle}>{course.title}</h3>
-        <p className={styles.cardBrief}>{course.brief}</p>
-        <Link href={course.href} className={styles.learnMore}>
-          Learn More<span className={styles.srOnly}> about {course.title}</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+
+      <div className={styles.body}>
+        <p className={styles.meta}>
+          <span className={styles.step} aria-hidden="true">
+            {String(step).padStart(2, "0")}
+          </span>
+          <span className={styles.level}>{level}</span>
+        </p>
+        <h3 className={styles.title}>
+          {/* Stretched link: the whole card is clickable */}
+          <Link href={href} className={styles.link}>
+            {title}
+          </Link>
+        </h3>
+        <p className={styles.brief}>{brief}</p>
+        <span className={styles.learnMore} aria-hidden="true">
+          {featured ? "Discover The Master Class" : "Learn More"}
+          <svg viewBox="0 0 16 16" focusable="false">
             <path d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5" />
           </svg>
-        </Link>
+        </span>
       </div>
     </article>
   );

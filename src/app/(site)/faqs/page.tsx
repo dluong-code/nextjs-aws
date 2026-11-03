@@ -5,8 +5,7 @@ import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "FAQs",
-  description:
-    "Find quick answers to the most common questions about our nail courses, training and support.",
+  description: "Find quick answers to the most common questions about our nail courses, training and support.",
 };
 
 // Placeholder answers: replace with confirmed details before launch
@@ -85,7 +84,7 @@ export default function FaqsPage() {
           alt: "Glossy nude almond-shaped nails resting on a stone surface beside a sage green jar.",
         }}
       />
-      <FaqAccordion items={FAQS} defaultOpenId="experience" />
+      <FaqAccordion items={FAQS} />
       <CtaBanner
         eyebrow="Take the next step"
         title={"Ready to start\nyour nail journey?"}
